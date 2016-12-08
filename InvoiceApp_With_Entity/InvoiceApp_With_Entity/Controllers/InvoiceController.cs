@@ -47,5 +47,41 @@ namespace InvoiceApp_With_Entity.Controllers
             ViewBag.uAthorization = autorization;
             return View("InovoicePage");
         }
+        [HttpGet]
+        public ActionResult AddInvoice()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult AddInvoice(Invoice userInvoice)
+        {
+            if (ModelState.IsValid)
+            {
+                if (userInvoice != null)
+                {
+                    userInvoice.Paid = false;
+                    _invoice.SaveInvoice(userInvoice);
+                }
+                return RedirectToAction("InvoicePage");
+
+            }
+            else
+            {
+                return View();
+            }
+        }
+
+        public ActionResult ViewInvoices()
+        {
+            ViewBag.managerAuth = true;
+
+            return View(_invoice.InvoiceList);
+        }
+        public ActionResult LogOut()
+        {
+            Session.Abandon();
+            return RedirectToAction("Index", "UserAccounts");
+        }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,6 +17,13 @@ namespace InoivceApp_With_Entity.Domain.Entities
     }
     public class Invoice
     {
+
+        /// <summary>
+        /// Property for getting and setting the invoice number which gets generated each 
+        /// time an invoice is made
+        /// </summary>
+        [Key, Required]
+        public int InvoiceNumber { get; set; }
         /// <summary>
         /// Property for getting and setting the client name
         /// </summary>
@@ -34,24 +42,11 @@ namespace InoivceApp_With_Entity.Domain.Entities
         /// </summary>
         [Required(ErrorMessage = "Please enter the date")]
         public DateTime DateOfShipment { get; set; }
-
-        public void Change(Invoice invoice)
-        {
-            this.ClientName = invoice.ClientName;
-            this.ClientAddress = invoice.ClientAddress;
-            this.DateOfShipment = invoice.DateOfShipment;
-            this.PaymenDueDate = invoice.PaymenDueDate;
-            this.ProductQuantity = invoice.ProductQuantity;
-            this.ProductName = invoice.ProductName;
-            this.Currency = invoice.Currency;
-            this.Paid = invoice.Paid;
-        }
-
         /// <summary>
         /// Property for getting and setting the payment due date
         /// </summary>
         [Required(ErrorMessage = "Please enter the date")]
-        public DateTime PaymenDueDate { get; set; }
+        public DateTime PaymentDueDate { get; set; }
 
         /// <summary>
         /// Property for getting and setting the product name
@@ -77,36 +72,44 @@ namespace InoivceApp_With_Entity.Domain.Entities
         [Required(ErrorMessage = "Plase select a proper currency from the dropdown menu")]
         public TypeOfCurrency Currency { get; set; }
 
-        /// <summary>
-        /// Property for getting and setting the invoice number which gets generated each 
-        /// time an invoice is made
-        /// </summary>
-        [Key]
-        public int InvoiceNumber { get; set; }
+
         [Required]
         public bool Paid { get; set; }
+
+
+        public void Change(Invoice invoice)
+        {
+            this.ClientName = invoice.ClientName;
+            this.ClientAddress = invoice.ClientAddress;
+            this.DateOfShipment = invoice.DateOfShipment;
+            this.PaymentDueDate = invoice.PaymentDueDate;
+            this.ProductQuantity = invoice.ProductQuantity;
+            this.ProductName = invoice.ProductName;
+            this.Currency = invoice.Currency;
+            this.Paid = invoice.Paid;
+        }
 
         /// <summary>
         /// Read-only property which calculates the total price for the product 
         /// without any taxes
         /// </summary>
-        public decimal totalPriceForProduct
+        public decimal totalPriceForProduct()
         {
-            get { return UnitPrice * ProductQuantity; }
+           return UnitPrice * ProductQuantity;
         }
-
+        public decimal totalTax()
+        {
+            return UnitPrice * 0.1m;
+        }
         /// <summary>
         /// Read-only property which calculates the total price of the product
         /// including the 10% tax specified in the requirnments
         /// </summary>
-        public decimal totalPrice
+        public decimal totalPrice()
         {
-            get { return totalPriceForProduct * 0.1m + totalPriceForProduct; }
+            return totalPriceForProduct() + totalTax();
         }
 
-        public decimal totalTax
-        {
-            get { return totalPriceForProduct * 0.1m; }
-        }
+
     }
 }

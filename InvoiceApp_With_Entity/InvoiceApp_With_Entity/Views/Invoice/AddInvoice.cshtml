@@ -1,0 +1,65 @@
+﻿@using InoivceApp_With_Entity.Domain.Entities
+@model Invoice
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="~/Content/bootstrap.min.css" />
+    <script type="text/javascript" src="~/Scripts/bootstrap.min.js"></script>
+    <title>Add Invoice</title>
+</head>
+<body>
+    <div class="panel panel-success">
+        <div class="panel-heading text-center">
+            <h4>Add Invoice</h4>
+        </div>
+        <div class="panel-body text-center">
+            @using (Html.BeginForm("AddInvoice", "Invoice"))
+            {
+                @Html.ValidationSummary()
+                <div class="form-group col-md-5">
+                    <label>Client Name:</label>
+                    @Html.TextBoxFor(i => i.ClientName, new { @class = "form-control" })
+                </div>
+                <div class="form-group col-md-5">
+                    <label>Client Address</label>
+                    @Html.TextBoxFor(i => i.ClientAddress, new { @class = "form-control" })
+                </div>
+                <div class="form-group col-md-5">
+                    <label>Date of Shipment*(dd-mm-yyyy):</label>
+                    @Html.TextBoxFor(i => i.DateOfShipment, new { @class = "form-control" })
+                </div>
+                <div class="form-group col-md-5">
+                    <label>Payment Due Date*(dd-mm-yyyy):</label>
+                    @Html.TextBoxFor(i => i.PaymentDueDate, new { @class = "form-control" })
+                </div>
+                <div class="form-group col-md-5">
+                    <label>Product Name</label>
+                    @Html.TextBoxFor(i => i.ProductName, new { @class = "form-control" })
+                </div>
+                <div class="form-group col-md-5">
+                    <label>Product Quantity:</label>
+                    @Html.TextBoxFor(i => i.ProductQuantity, new { @class = "form-control" })
+                </div>
+                <div class="form-group col-md-5">
+                    <label>Unit Price:</label>
+                    @Html.TextBoxFor(i => i.UnitPrice, new { @class = "form-control" })
+                </div>
+                <div class="form-group col-md-5">
+                    <label>Currency</label>
+                    @Html.DropDownList("selectCurrency", new SelectList(Enum.GetNames(typeof(TypeOfCurrency))), "Select Currency Type", new { @class = "form-control" })
+                </div>
+                <div class="text-center">
+                    <input type="submit" value="Add Invoice" class="btn btn-success" />
+                </div>
+            }
+        </div>
+    </div>
+</body>
+</html>

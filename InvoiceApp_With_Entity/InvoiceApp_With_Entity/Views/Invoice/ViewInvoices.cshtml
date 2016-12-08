@@ -1,0 +1,66 @@
+﻿@using InoivceApp_With_Entity.Domain.Entities
+@model IEnumerable<Invoice>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="~/Content/bootstrap.css" />
+    <script type="text/javascript" src="~/Scripts/bootstrap.min.js"></script>
+    <title>ViewInvoices</title>
+</head>
+<body>
+    @if (ViewBag.managerAuth == true)
+    {
+        <div class="container">
+            <table class="table table-condensed text-center">
+                <thead>
+                    <tr>
+                        <th>Invoice Number</th>
+                        <th>Client Name</th>
+                        <th>Total</th>
+                        <th>Payment Due Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (Invoice invoice in Model)
+                    {
+                        <tr>
+                            <td>@Html.ActionLink(invoice.InvoiceNumber.ToString(), "EditInvoice", new { invoice.InvoiceNumber })</td>
+                            <td>@Html.ActionLink(invoice.ClientName, "EditInvoice", new { invoice.InvoiceNumber })</td>
+                            <td>@invoice.totalPriceForProduct()</td>
+                            <td>@invoice.PaymentDueDate</td>
+                        </tr>
+
+                    }
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="2">Sub Total:</td>
+                        @{decimal total = 0;}
+
+                        @foreach (Invoice i in Model)
+                        {
+
+                            total += i.totalPriceForProduct();
+                        }
+                        <td>@total</td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+                            }
+                            else
+                            {
+                                @:Please Enter the proper credentials before accessing this page
+         }
+
+
+</body>
+
+</html>
