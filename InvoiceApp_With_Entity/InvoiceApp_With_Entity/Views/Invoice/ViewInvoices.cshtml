@@ -35,6 +35,7 @@
                             <td>@Html.ActionLink(invoice.ClientName, "EditInvoice", new { invoice.InvoiceNumber })</td>
                             <td>@invoice.totalPriceForProduct()</td>
                             <td>@invoice.PaymentDueDate</td>
+                            <td>@Html.ActionLink("Paid?","PaidInvoice",new { invoice.InvoiceNumber }) </td>
                         </tr>
 
                     }
@@ -44,11 +45,11 @@
                         <td colspan="2">Sub Total:</td>
                         @{decimal total = 0;}
 
-                        @foreach (Invoice i in Model)
+                                @foreach (Invoice i in Model)
                         {
 
-                            total += i.totalPriceForProduct();
-                        }
+                                    total += i.totalPriceForProduct();
+                                }
                         <td>@total</td>
                     </tr>
                 </tfoot>

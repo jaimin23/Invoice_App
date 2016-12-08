@@ -75,8 +75,36 @@ namespace InvoiceApp_With_Entity.Controllers
         public ActionResult ViewInvoices()
         {
             ViewBag.managerAuth = true;
+            var unPaidInvoices = from i in _invoice.InvoiceList where i.Paid == false select i;
+            return View(unPaidInvoices);
+        }
 
-            return View(_invoice.InvoiceList);
+        public ActionResult EditInvoice(int invoiceNumber)
+        {
+            Invoice invoice = _invoice.InvoiceList.FirstOrDefault(i => i.InvoiceNumber == invoiceNumber);
+            return View(invoice);
+        }
+        public ActionResult SaveInvoice(Invoice invoice)
+        {
+            if (ModelState.IsValid)
+            {
+                if(invoice != null)
+                {
+                    _invoice.SaveInvoice(invoice);
+                }
+            }
+            return RedirectToAction("ViewInvoices");
+        }
+        
+        public ActionResult PaidInvoice(int invoiceNumber)
+        {
+            Invoice invoice = _invoice.InvoiceList.FirstOrDefault(i => i.InvoiceNumber == invoiceNumber);
+            if(invoice != null)
+            {
+                invoice.Paid = true;
+                _invoice.SaveInvoice(invoice);
+            }
+            return RedirectToAction("ViewInvoices");
         }
         public ActionResult LogOut()
         {

@@ -99,7 +99,7 @@ namespace InoivceApp_With_Entity.Domain.Entities
         }
         public decimal totalTax()
         {
-            return UnitPrice * 0.1m;
+            return totalPriceForProduct() * 0.1m;
         }
         /// <summary>
         /// Read-only property which calculates the total price of the product
