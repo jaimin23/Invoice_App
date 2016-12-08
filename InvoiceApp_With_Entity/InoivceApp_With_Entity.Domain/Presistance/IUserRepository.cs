@@ -9,7 +9,7 @@ namespace InoivceApp_With_Entity.Domain.Presistance
 {
     public interface IUserRepository
     {
-        IEnumerable<User> Users { get; }
+        IEnumerable<User> ListOfUsers { get; }
         void SaveUser(User user);
     }
 }

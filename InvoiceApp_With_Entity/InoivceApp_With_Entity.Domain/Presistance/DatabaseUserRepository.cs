@@ -15,7 +15,7 @@ namespace InoivceApp_With_Entity.Domain.Entities
         {
             _dbContext = new InvoiceDbContext();
         }
-        public IEnumerable<User> Users
+        public IEnumerable<User> ListOfUsers
         {
             get
             {
@@ -25,13 +25,13 @@ namespace InoivceApp_With_Entity.Domain.Entities
 
         public void SaveUser(User user)
         {
-            if(user.UserID == 0)
+            if(user.UserId == 0)
             {
                 _dbContext.Users.Add(user);
             }
             else
             {
-                User userEntity = _dbContext.Users.Find(user.UserID);
+                User userEntity = _dbContext.Users.Find(user.UserId);
                 userEntity.Change(user);
             }
             _dbContext.SaveChanges();

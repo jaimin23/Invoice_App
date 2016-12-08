@@ -26,13 +26,13 @@ namespace InoivceApp_With_Entity.Domain.Presistance
 
         public void SaveInvoice(Invoice invoice)
         {
-            if(invoice.InoiceNumber == 0)
+            if(invoice.InvoiceNumber == 0)
             {
                 _dbContext.Invoices.Add(invoice);
             }
             else
             {
-                Invoice invoiceEntity = _dbContext.Invoices.Find(invoice.InoiceNumber);
+                Invoice invoiceEntity = _dbContext.Invoices.Find(invoice.InvoiceNumber);
                 invoiceEntity.Change(invoice);
             }
 

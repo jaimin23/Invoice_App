@@ -1,0 +1,61 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="~/Content/bootstrap.css" />
+    <script type="text/javascript" src="~/Scripts/bootstrap.min.js"></script>
+    <title>Invoice Page</title>
+    <style>
+        .btn a {
+            color: white;
+            text-decoration: none;
+        }
+
+        body {
+            background-color: #F1F1F1;
+        }
+    </style>
+</head>
+<body>
+    @if (ViewBag.uAuthorization == true)
+    {
+        if (ViewBag.uType == "User")
+        {
+            <div class="text-center">
+                <h1>Welcome to Invoice Page, @ViewBag.uName</h1>
+
+                <div class="btn btn-success">
+                    @Html.ActionLink("Add New Invoice", "AddInvoice")
+                </div>
+                <div class="btn btn-danger">
+                    @Html.ActionLink("Log Out", "LogOut")
+                </div>
+            </div>
+
+
+        }
+        else if (ViewBag.uType == "Manager")
+        {
+            <div class="text-center">
+                <h1>Welcome to Invoice Page, @ViewBag.uName</h1>
+                <div class="btn btn-success text-center">
+                    @Html.ActionLink("View Invoices", "ViewInvoices")
+                </div>
+                <div class="btn btn-success text-center">
+                    @Html.ActionLink("Add New Invoice", "AddInvoice")
+                </div>
+            </div>
+        }
+    }
+    else
+    {
+        @:You do not have proper permision to enter this page please log in with proper credentials, Thank you
+        }
+</body>
+</html>

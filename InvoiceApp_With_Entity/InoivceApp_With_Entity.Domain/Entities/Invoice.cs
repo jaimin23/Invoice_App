@@ -81,8 +81,8 @@ namespace InoivceApp_With_Entity.Domain.Entities
         /// Property for getting and setting the invoice number which gets generated each 
         /// time an invoice is made
         /// </summary>
-        [Required]
-        public int InoiceNumber { get; set; }
+        [Key]
+        public int InvoiceNumber { get; set; }
         [Required]
         public bool Paid { get; set; }
 

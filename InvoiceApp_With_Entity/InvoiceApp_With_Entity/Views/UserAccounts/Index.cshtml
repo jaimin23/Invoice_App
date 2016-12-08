@@ -1,0 +1,49 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="~/Content/bootstrap.min.css" />
+    <script type="text/javascript" src="~/Scripts/bootstrap.min.js"></script>
+    <title>LogIn Page</title>
+</head>
+<body>
+    <div class="panel panel-success text-center">
+        <div class="panel panel-body">
+            @if (ViewBag.isCorrect == false)
+            {
+                <h5> Wrong Information Entered</h5>
+                @Html.ActionLink("Go Back To Home Page", "Index");
+            }
+            else
+            {
+                <div class="panel panel-heading text-center">
+                    <h1>Welcome to Invoice Login Page</h1>
+                </div>
+                using (Html.BeginForm("ValidateUser", "UserAccounts"))
+                {
+                    <div class="form-group col-xs-4">
+                        <label>User Name:</label>
+                        @Html.TextBox("userName", null, new { @class = "form-control" })
+                    </div>
+                    <div class="form-group col-xs-4">
+                        <label>Password:</label>
+                        @Html.TextBox("userPassword", null, new { type = "password", @class = "form-control" })
+                    </div>
+                    <br />
+                    <div>
+                        <input type="submit" class="btn btn-primary" name="_btnSubmit" value="User Login" />
+                        <input type="submit" class="btn btn-success" name="_btnSubmit" value="Manager Login" />
+                    </div>
+                }
+            }
+        </div>
+
+    </div>
+</body>
+</html>

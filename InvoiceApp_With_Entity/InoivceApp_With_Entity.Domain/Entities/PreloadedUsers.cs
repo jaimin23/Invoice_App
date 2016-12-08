@@ -15,7 +15,7 @@ namespace InoivceApp_With_Entity.Domain.Entities
         public PreloadedUsers(IUserRepository userRepository)
         {
             _userRepository = userRepository;
-            this.UserList = _userRepository.Users;
+            this.UserList = _userRepository.ListOfUsers;
         }
         public void SaveUser(User user)
         {
