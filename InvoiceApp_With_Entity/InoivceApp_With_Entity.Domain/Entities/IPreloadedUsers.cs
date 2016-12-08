@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace InoivceApp_With_Entity.Domain.Entities
 {
-    class InvoiceContainer
+    public interface IPreloadedUsers
     {
+        IEnumerable<User> UserList { get; }
+
+        void SaveUser(User user);
     }
 }

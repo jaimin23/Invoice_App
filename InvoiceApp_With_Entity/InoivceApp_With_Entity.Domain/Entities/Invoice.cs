@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace InoivceApp_With_Entity.Domain.Entities
 {
-    public enum TypeOfCurrency
+    public enum TypeOfCurrency: byte
     {
 
-        CAD,
+        CAD = 1,
         US,
         EUR
     }
@@ -34,6 +34,18 @@ namespace InoivceApp_With_Entity.Domain.Entities
         /// </summary>
         [Required(ErrorMessage = "Please enter the date")]
         public DateTime DateOfShipment { get; set; }
+
+        public void Change(Invoice invoice)
+        {
+            this.ClientName = invoice.ClientName;
+            this.ClientAddress = invoice.ClientAddress;
+            this.DateOfShipment = invoice.DateOfShipment;
+            this.PaymenDueDate = invoice.PaymenDueDate;
+            this.ProductQuantity = invoice.ProductQuantity;
+            this.ProductName = invoice.ProductName;
+            this.Currency = invoice.Currency;
+            this.Paid = invoice.Paid;
+        }
 
         /// <summary>
         /// Property for getting and setting the payment due date

@@ -54,9 +54,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DomainFactoryModule.cs" />
+    <Compile Include="Entities\IPreloadedInvoices.cs" />
+    <Compile Include="Entities\IPreloadedUsers.cs" />
+    <Compile Include="Entities\PreloadedInvoices.cs" />
+    <Compile Include="Entities\PreloadedUsers.cs" />
     <Compile Include="Presistance\DatabaseUserRepository.cs" />
     <Compile Include="Entities\Invoice.cs" />
-    <Compile Include="Entities\InvoiceContainer.cs" />
     <Compile Include="Entities\User.cs" />
     <Compile Include="Presistance\DatabaseInvoiceRepository.cs" />
     <Compile Include="Presistance\IInvoiceRepository.cs" />
