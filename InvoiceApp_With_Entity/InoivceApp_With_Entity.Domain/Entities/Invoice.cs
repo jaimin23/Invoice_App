@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace InoivceApp_With_Entity.Domain.Entities
 {
+    /// <summary>
+    /// This enum holds the currency types 
+    /// </summary>
     public enum TypeOfCurrency: byte
     {
 
@@ -76,7 +79,11 @@ namespace InoivceApp_With_Entity.Domain.Entities
         [Required]
         public bool Paid { get; set; }
 
-
+        /// <summary>
+        /// This method hadles the changes for the object and updates the 
+        /// object with the new information
+        /// </summary>
+        /// <param name="invoice"></param>
         public void Change(Invoice invoice)
         {
             this.ClientName = invoice.ClientName;
@@ -97,6 +104,10 @@ namespace InoivceApp_With_Entity.Domain.Entities
         {
            return UnitPrice * ProductQuantity;
         }
+        /// <summary>
+        /// This method calculates the tax of the item
+        /// </summary>
+        /// <returns></returns>
         public decimal totalTax()
         {
             return totalPriceForProduct() * 0.1m;

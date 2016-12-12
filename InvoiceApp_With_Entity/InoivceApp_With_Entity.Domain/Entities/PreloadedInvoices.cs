@@ -18,6 +18,10 @@ namespace InoivceApp_With_Entity.Domain.Entities
             _repository = repository;
             this.InvoiceList = _repository.Invoices;
         }
+        /// <summary>
+        /// This method is resposible for saving/updating the invoice in the table
+        /// </summary>
+        /// <param name="invoice"></param>
         public void SaveInvoice(Invoice invoice)
         {
             _repository.SaveInvoice(invoice);

@@ -7,6 +7,10 @@ using System.Threading.Tasks;
 
 namespace InoivceApp_With_Entity.Domain.Entities
 {
+    /// <summary>
+    /// This class is responsible for loading up the user data into an IEnumerable list 
+    /// type user and also contaisn the save functionality which saves new users
+    /// </summary>
     class DatabaseUserRepository : IUserRepository
     {
         private InvoiceDbContext _dbContext;
@@ -22,7 +26,10 @@ namespace InoivceApp_With_Entity.Domain.Entities
                 return _dbContext.Users;
             }
         }
-
+        /// <summary>
+        /// This method saves and updates the user information based on the user object passed
+        /// </summary>
+        /// <param name="user"></param>
         public void SaveUser(User user)
         {
             if(user.UserId == 0)
@@ -31,7 +38,7 @@ namespace InoivceApp_With_Entity.Domain.Entities
             }
             else
             {
-                User userEntity = _dbContext.Users.Find(user.UserId);
+                User userEntity = _dbContext.Users.Find(user.UserName);
                 userEntity.Change(user);
             }
             _dbContext.SaveChanges();
